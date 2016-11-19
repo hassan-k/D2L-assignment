@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html ng-app="public">
+<head >
+	<meta charset="utf-8">
+	<title>Sample</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="admin pages">
+	<meta name="author" content="admin">
+	<!-- Bootstrap core CSS -->
+	<link href="../bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+	<link href="../bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="../css/base.css" rel="stylesheet">
+</head>
+<body >
+    <div>
+       <nav role="navigation" class="navbar navbar-default ">
+            <!-- logo -->
+            <div class="navbar-header">
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand"><img src="../img/d2l-logo.png" alt="D2L" /></a>        
+            </div>             
+        </nav>
+    </div>
+	<div class="container " ng-controller=" homeController as homectrl" >
+	 <div class="row">
+		 <div class="col-md-7 col-sm-offset-1"  >
+		 	<div class="col-md-11" >
+			    <div class="row"><h1>Editing Question</h1></div>
+			   	<div class="row text-right">
+					<a role="button" data-toggle="collapse" href="#collapseQuestion" aria-expanded="false" aria-controls="collapseQuestion">
+					  Option
+					</a>
+				</div>
+				<div class="collapse in" id="collapseQuestion">
+					  <form>
+						  <div class="form-group">
+						    <label for="shortDescription">Short Description</label>
+						    <input type="text" class="form-control" id="shortDescription" placeholder="Description" ng-model="model.shortDescription">
+						  </div>
+						  <div class="form-group">
+						    <label for="questionText">Question Text<sup>*</sup></label>
+						    <textarea type="text" rows="3" class="form-control" id="questionText" placeholder="" ng-model="model.questionText" required></textarea>
+						  </div>
+						  <div class="form-group">
+						    <label for="hintText">Hint</label>
+						    <input type="text" class="form-control" id="hintText" placeholder="" ng-model="model.hint">
+						  </div>
+					 </form>
+				 </div>
+				 <div>
+				 	<div class="row"><h3>Answers<sup>*</sup></h3></div>
+				 	<div ng-repeat="template in templates track by $index">
+				  		<ng-include src="template"></ng-include>
+					</div>
+					<br>
+					<div class="row margined">
+						<a hre="" id="btnAddAnswerRow"  ng-click="addTemplate('answer')" >Add Answer</a>
+					</div>
+				 </div>
+				 <hr>
+				 <div class="row">
+				 	<div class="col-md-1 col-xs-1" >
+				 		<input type="checkbox" id="check" />
+				 	</div>
+				 	<div class="col-md-10 col-xs-10" >
+				 		<p>Randomize answers for each student</p>
+				 	</div>
+				 </div>
+				 <div class="row">
+				 	<div class="col-md-5" >
+				 		<label for="enumeration">Enumeration</label>
+				    	<select class="form-control" id="enumeration" ng-change="changeIndex()" ng-model="model.enumeration" >
+                            <option ng-value="0" selected="selected" >a, b, c, d, e, ...</option>
+                            <option ng-value="1">1, 2, 3, 4, 5, ...</option>
+				    	</select>
+				 	</div>
+				 	<div class="col-md-7" >
+				 	</div>
+				 </div>
+				 
+				 <div class="row">
+				 	<div class="col-md-5" >
+				 		<label for="defaultPoints">Default Points<sup>*</sup></label>
+				    	<input type = "text" class="form-control" id="defaultPoints" placeholder="1" ng-model="model.defaultPoints" required>
+				 	</div>
+				 	<div class="col-md-7" >
+				 	</div>
+				 </div>
+				 <hr>
+				 <div class="row">
+				 	<div class="col-md-1 col-xs-3">
+						<input type="button" class="btn  btn-primary" value="Save" />
+					</div>
+					<div class="col-md-2 col-sm-offset-1 col-xs-5">
+						<input type="button" class="btn  btn-default" value="Save and New" />
+					</div>
+					<div class="col-md-2 col-sm-offset-1 col-xs-4">
+						<input type="button" class="btn  btn-default" value="Cancel" />
+					</div>
+					<div class="col-md-6 ol-xs-1">
+						
+					</div>
+ 				</div>
+		    </div>
+	     </div>
+	     <div class="col-sm-4  grid-divider" style="height:100%"  >
+		     <div >
+			    <div class="row">
+			    	<div class="col-md-10"><h2>Preview</h2></div>
+			    </div>
+			    <hr>
+			    <div class="panel panel-default">
+			     	<div class="panel-heading">{{model.shortDescription}}</div>
+					  <div class="panel-body">
+					    <p>{{model.questionText}}</p>
+					  </div>
+					
+					  <!-- Table -->
+					  <table class="table">
+					    <tr ng-repeat="answer in answers track by $index">
+				  			<td width="10"><input type="checkbox" id="check1" /></td>
+				  			<td width="10">({{answer.enumType}})</td>
+				  			<td width="100%">{{answer.text}}</td>
+						</tr>
+					  </table>
+				</div>
+				<hr>
+				<div class="panel-footer">
+					<div class="panel">Hint:</div>
+					<div class="row">{{model.hint}}</div>			
+				</div>
+		     </div>
+	     </div>        
+	 </div>       
+	</div>
+   <div>
+<!--		<script src="../js/lib/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--		<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>-->
+		<!-- ng codes -->
+	    <script src="../js/lib/angular.js"></script>
+	    <script src="../js/lib/angular-animate.js"></script>
+	    <script src="../js/lib/angular-messages.js"></script>
+	    <script src="../js/lib/angular-route.js"></script>
+	    <script src="../js/lib/angular-filter.js"></script>
+	    <script src="../js/ng/app.js"></script>
+	    <script src="../js/ng/controllers/public.ctrl.js"></script>
+	</div>	
+	<script type="text/ng-template" id="answer">
+		<br>
+    	<div class="row">
+	   		<div class="col-md-1 col-xs-1 ">
+	   			<span class="glyphicon glyphicon-menu-hamburger margined" aria-hidden="true" ></span>
+	   		</div>
+	   		<div class="col-md-1 col-xs-1 ">
+	   			<input type="checkbox" id="check" class="chk" />
+	   		</div>
+	   		<div class="col-md-9 col-xs-8 ">
+	   			<input type="text" class="form-control" ng-model="answer$index" placeholder="" ng-change="addText($index,this)" >
+	   		</div>
+	   		<div class="col-md-1 col-xs-1 ">
+				<span class="glyphicon glyphicon-remove margined" aria-hidden="true" ng-click="removeTemplate()"></span>
+			</div>
+		</div>
+	</script>
+</body>

@@ -1,0 +1,38 @@
+/*@media (min-width: 768px) { */
+
+input[type=checkbox].chk  {
+  transform: scale(2.5);
+  margin-top: 10px;
+}
+
+a {
+	cursor:pointer;
+}
+	
+.container {
+   
+    height:100%;
+}
+	
+.grid-divider  {
+    border-left: 1px solid #ddd;
+    background-color:#f5f5f5;
+    padding-left:50px;
+    padding-right:40px;
+}
+
+.margined{
+	margin-top: 8px;
+}
+.link {
+	
+}
+
+.footer{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: beige;
+    color: aliceblue;
+    height: 20px;
+    text-align: center;
+}
